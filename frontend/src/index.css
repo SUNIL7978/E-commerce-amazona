@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-header{
+/* header{
   background-color: #404040;
   padding: 1rem;
 }
@@ -22,10 +22,14 @@ header a{
   text-decoration: none;
   font-weight: bold;
   font-size: larger;
+} */
+
+.site-container{
+  min-height: 100vh;
 }
 
 main{
-  padding: 1rem;
+  flex:1;
 }
 
 .products{
@@ -64,4 +68,10 @@ main{
 
 .product_info button:hover{
   cursor: pointer;
+}
+
+footer{
+  background-color: #1c2020;
+  color: aliceblue;
+  padding: 0.50rem;
 }
