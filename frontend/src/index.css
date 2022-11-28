@@ -23,3 +23,45 @@ header a{
   font-weight: bold;
   font-size: larger;
 }
+
+main{
+  padding: 1rem;
+}
+
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+ 
+.product{
+  border: 2px solid black;
+  margin: 1rem;
+}
+
+.product img{
+  width: 100%;
+  max-width: 400px;
+  height: 40vh;
+}
+
+.product_info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.product_info p{
+  font-weight: bold;
+}
+
+.product_info button{
+  padding: 0.50rem;
+  border-radius: 10px;
+}
+
+.product_info button:hover{
+  cursor: pointer;
+}
