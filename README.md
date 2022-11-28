@@ -1,15 +1,15 @@
-List Of Product
+1.List Of Product
     1.Create Product Array
     2.add Products Image
     3.Render Product
     4.style Product
 
-Add Raect-Router-Dom 
+2.Add Raect-Router-Dom 
     1. npm i react-router-dom
     2. create route for home screen
     3. create router for product screen
    
-Ceate backend Api To install Node.js Server
+3.Ceate backend Api To install Node.js Server
 
     1. run npm init in root folder
     2. Update package.json set type: module
@@ -23,3 +23,11 @@ Ceate backend Api To install Node.js Server
     10. create route for /api/products
     11. return products
     12. run npm start
+
+4.Fetch Products From Backend
+
+    1. set proxy in package.json
+    2. npm install axios
+    3. use state hook
+    4. use effect hook
+    5. use reducer hook
