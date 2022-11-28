@@ -57,8 +57,12 @@ main{
   margin: 1rem;
 }
 
-.product_info p{
-  font-weight: bold;
+.rating span{
+  color: #FDCC0D;
+}
+
+.product_info .product_name{
+  font-size:large;
 }
 
 .product_info button{
@@ -74,4 +78,9 @@ footer{
   background-color: #1c2020;
   color: aliceblue;
   padding: 0.50rem;
+}
+
+.btn_primary{
+  background-color: #FDCC0D;
+  color: black;
 }
