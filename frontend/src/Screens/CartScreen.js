@@ -5,15 +5,37 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import MessageBox from '../Components/MessageBox';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi'
 import { MdDeleteOutline } from 'react-icons/md'
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 const CartScreen = () => {
+    const navigate = useNavigate()
     const { state, dispatch: ctxDispatch } = useContext(Store)
-    const { cart: { cartItems } } = state
+    const { cart: { cartItems } } = state;
+
+    const updateCartHandler = async (item, quantity) => {
+        const { data } = await axios.get(`/api/products/${item._id}`);
+        if (data.countInStock < quantity) {
+            window.alert('Sorry. Product is out of stock');
+            return;
+        }
+        ctxDispatch({
+            type: 'CART_ADD_ITEM',
+            payload: { ...item, quantity },
+        });
+    }
+
+    const removeItemHandler = (item) => {
+        ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item })
+    }
+
+    const checkoutHandler = () => {
+        navigate('/signin?redirect=/shipping');
+      };
 
     return (
         <div>
@@ -38,17 +60,17 @@ const CartScreen = () => {
                                                 <span className='cart_slug'>{item.name}</span></Link>
                                         </Col>
                                         <Col md={2} className="m-4">
-                                            <button disabled={item.quantity === 1}>
+                                            <button disabled={item.quantity === 1} onClick={() => updateCartHandler(item, item.quantity - 1)}>
                                                 <HiOutlineMinusCircle />
-                                            </button>{' '}
-                                            <span className='m-2'>{item.quantity}</span>{' '}
-                                            <button disabled={item.quantity === item.countInStock}>
+                                            </button>
+                                            <span className='m-2'>{item.quantity}</span>
+                                            <button disabled={item.quantity === item.countInStock} onClick={() => updateCartHandler(item, item.quantity + 1)}>
                                                 <HiOutlinePlusCircle />
-                                            </button>{' '}
+                                            </button>
                                         </Col>
                                         <Col md={2}><strong>${item.price}</strong></Col>
                                         <Col md={2}>
-                                            <button style={{ fontSize: "large" }}>
+                                            <button style={{ fontSize: "large" }} onClick={() => removeItemHandler(item)}>
                                                 <MdDeleteOutline />
                                             </button>
                                         </Col>
@@ -75,7 +97,8 @@ const CartScreen = () => {
                                         <Button
                                             type="button"
                                             variant="primary"
-                                            className='btn_primary'
+                                            className='btn_primary mt-3'
+                                            onClick={checkoutHandler}
                                             disabled={cartItems.length === 0}
                                         >
                                             Proceed to Checkout
