@@ -84,3 +84,8 @@ footer{
   background-color: #FDCC0D;
   color: black;
 }
+
+.cart_slug{
+  text-decoration: none;
+  color: black;
+}

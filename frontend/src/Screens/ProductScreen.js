@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import { Helmet } from 'react-helmet-async'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Rating from '../Components/Rating';
 import Button from 'react-bootstrap/esm/Button';
 import MessageBox from '../Components/MessageBox';
@@ -27,6 +27,7 @@ const reducer = (state, action) => {
 }
 
 const ProductScreen = () => {
+    const navigate = useNavigate();
     const [{ loading, error, product }, dispatch] = useReducer(reducer, {
         product: [],
         loading: true,
@@ -62,6 +63,7 @@ const ProductScreen = () => {
             type: 'CART_ADD_ITEM',
             payload: { ...product, quantity },
         });
+        navigate('/cart')
     };
     return (
         loading ? (
@@ -119,7 +121,7 @@ const ProductScreen = () => {
                                     {product.countInStock > 0 && (
                                         <ListGroup.Item>
                                             <div className='d-grid mt-3'>
-                                                <Button onClick={addToCartHandler}>Procced to Buy</Button>
+                                                <Button onClick={addToCartHandler}>Add to Cart</Button>
                                             </div>
                                         </ListGroup.Item>
                                     )}

@@ -2,8 +2,8 @@ const data = {
     products: [
         {
             _id: '1',
-            name: 'U.S. POLO ASSN. Mens T-Shirt',
-            slug: 'U.S. POLO ASSN. Mens T-Shirt',
+            name: 'U.S.POLO ASSN. Mens T-Shirt',
+            slug: 'U.S.POLO ASSN. Mens T-Shirt',
             category: 'Shirt',
             image: "https://m.media-amazon.com/images/I/615LuCaivAL._UL1100_.jpg",
             price: 50,
@@ -15,8 +15,8 @@ const data = {
         },
         {
             _id: '2',
-            name: 'Apple iPhone 14 Pro Max 128GB Silver',
-            slug: 'Apple iPhone 14 Pro Max 128GB Silver',
+            name: 'Apple iPhone 14 Pro Max',
+            slug: 'Apple iPhone 14 Pro Max',
             category: 'Mobile',
             image: "https://m.media-amazon.com/images/I/61nzPMNY8zL._SX679_.jpg",
             price: 1700,

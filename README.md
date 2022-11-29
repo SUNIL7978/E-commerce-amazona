@@ -34,7 +34,7 @@
     4. use effect hook
     5. use reducer hook
    
- 5.Manage State By Reducer Hook
+5.Manage State By Reducer Hook
 
     1. define reducer
     2. update fetch data
@@ -74,3 +74,9 @@
 
     1. check exist item in the cart
     2. check count in stock in backend
+
+12.Create Cart Screen
+
+    1. create 2 columns
+    2. display items list
+    3. create action column
