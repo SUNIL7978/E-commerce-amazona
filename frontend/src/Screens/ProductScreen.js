@@ -1,16 +1,17 @@
 import axios from 'axios'
-import React, { useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
-import {Helmet} from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import { useParams } from 'react-router-dom'
 import Rating from '../Components/Rating';
 import Button from 'react-bootstrap/esm/Button';
 import MessageBox from '../Components/MessageBox';
-import {getError} from '../utils'
+import { getError } from '../utils'
+import { Store } from '../Store';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -46,6 +47,14 @@ const ProductScreen = () => {
         }
         FetchData();
     }, [slug])
+
+    const { state, dispatch: ctxDispatch } = useContext(Store)
+    const addToCartHandler = () => {
+        ctxDispatch({
+            type: 'CART_ADD_ITEM',
+            payload: { ...product, quantity: 1 },
+        });
+    }
     return (
         loading ? (
             <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>
@@ -102,7 +111,7 @@ const ProductScreen = () => {
                                     {product.countInStock > 0 && (
                                         <ListGroup.Item>
                                             <div className='d-grid mt-3'>
-                                                <Button>Procced to Buy</Button>
+                                                <Button onClick={addToCartHandler}>Procced to Buy</Button>
                                             </div>
                                         </ListGroup.Item>
                                     )}
