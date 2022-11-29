@@ -89,3 +89,7 @@ footer{
   text-decoration: none;
   color: black;
 }
+
+.small-container{
+  max-width: 600px;
+}
