@@ -9,6 +9,8 @@ import {Helmet} from 'react-helmet-async'
 import { useParams } from 'react-router-dom'
 import Rating from '../Components/Rating';
 import Button from 'react-bootstrap/esm/Button';
+import MessageBox from '../Components/MessageBox';
+import {getError} from '../utils'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -39,7 +41,7 @@ const ProductScreen = () => {
                 const result = await axios.get(`/api/products/slug/${slug}`)
                 dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
             } catch (err) {
-                dispatch({ type: 'FETCH_FAIL', payload: err.message })
+                dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
             }
         }
         FetchData();
@@ -48,7 +50,7 @@ const ProductScreen = () => {
         loading ? (
             <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>
         ) : error ? (
-            <div>{error}</div>
+            <MessageBox variant="danger">{error}</MessageBox>
         ) : (
             <div>
                 <Row>

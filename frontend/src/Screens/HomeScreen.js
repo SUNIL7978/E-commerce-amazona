@@ -5,6 +5,8 @@ import {Helmet} from 'react-helmet-async'
 import axios from 'axios'
 import logger from 'use-reducer-logger';
 import Product from '../Components/Product';
+import MessageBox from '../Components/MessageBox'
+import { getError } from '../utils';
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -34,7 +36,7 @@ const HomeScreen = () => {
                 const result = await axios.get('/api/products') //Axios is a promise-based HTTP Client for node.js and the browser. It is isomorphic (= it can run in the browser and nodejs with the same codebase). On the server-side it uses the native node.js http module, while on the client (browser) it uses XMLHttpRequests.
                 dispatch({ type: 'FETCH_SUCCESS', payload: result.data })
             } catch (err) {
-                dispatch({ type: 'FETCH_FAIL', payload: err.message })
+                dispatch({ type: 'FETCH_FAIL', payload: getError(err) })
             }
 
             // setProducts(result.data)
@@ -51,7 +53,7 @@ const HomeScreen = () => {
                 {loading ? (
                     <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>
                 ) : error ? (
-                    <div>{error}</div>
+                    <MessageBox variant="danger">{error}</MessageBox>
                 ) : (
                     <Row>
                         {products.map((product) => (
