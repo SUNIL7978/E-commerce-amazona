@@ -4,7 +4,7 @@ import { BiStar } from 'react-icons/bi'
 
 const Rating = ({stars,numReviews }) => {
     return (
-        <div className='rating'>
+        <div className='rating d-flex gap-1'>
             <span>
                 {stars >= 1 ? <BsStarFill /> : stars >= 0.5 ? <BsStarHalf /> : <BiStar />}
             </span>
@@ -20,6 +20,7 @@ const Rating = ({stars,numReviews }) => {
             <span>
                 {stars >= 5 ? <BsStarFill /> : stars >= 4.5 ? <BsStarHalf /> : <BiStar />}
             </span>
+            <p>{numReviews} <strong>Reviews</strong></p>
         </div>
     )
 }
