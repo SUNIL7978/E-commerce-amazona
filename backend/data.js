@@ -1,7 +1,7 @@
 const data = {
     products: [
         {
-            _id: '1',
+            // _id: '1',
             name: 'U.S.POLO ASSN. Mens T-Shirt',
             slug: 'U.S.POLO ASSN. Mens T-Shirt',
             category: 'Shirt',
@@ -14,7 +14,7 @@ const data = {
             description: "Premium Super combed cotton Stripe jersey fabric is soft & comfortable for all day wear due to its good absorbency & breathability"
         },
         {
-            _id: '2',
+            // _id: '2',
             name: 'Apple iPhone 14 Pro Max',
             slug: 'Apple iPhone 14 Pro Max',
             category: 'Mobile',
@@ -27,7 +27,7 @@ const data = {
             description: "17.00 cm (6.7-inch) Super Retina XDR display featuring Always-On and ProMotion"
         },
         {
-            _id: '3',
+            // _id: '3',
             name: 'Apple Watch Ultra GPS',
             slug: 'Apple Watch Ultra GPS',
             category: 'Watch',
@@ -40,7 +40,7 @@ const data = {
             description: "Specialized features, sensors, and three new bands designed for exploration, adventure, and endurance 49-millimetre aerospace-grade titanium case for an ideal balance of weight, strength and corrosion resistance The largest, brightest Apple Watch display for improved legibility in all conditions"
         },
         {
-            _id: '4',
+            // _id: '4',
             name: 'Puma SweertShirt',
             slug: 'Puma SweertShirt',
             category: 'SweertShirt',
@@ -53,7 +53,7 @@ const data = {
             description: "Puma MAPF1 Logo Hoodie"
         },
         {
-            _id: '5',
+            // _id: '5',
             name: 'Parx Dark Blue Jeans',
             slug: 'Parx Dark Blue Jeans',
             category: 'Jeans',
@@ -66,7 +66,7 @@ const data = {
             description: "Care Instructions: Machine Wash Fit Type: Skinny Fabric: Cotton Blend Pattern: Solid"
         },
         {
-            _id: '6',
+            // _id: '6',
             name: 'Apple iPhone 13 Mini',
             slug: 'Apple iPhone 13 Mini',
             category: 'Mobile',
@@ -79,7 +79,7 @@ const data = {
             description: "13 cm (5.4-inch) Super Retina XDR display Cinematic mode adds shallow depth of field and shifts focus automatically in your videos Advanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording 12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording A15 Bionic chip for lightning-fast performance"
         },
         {
-            _id: '7',
+            // _id: '7',
             name: 'Apple iPhone 14 Plus',
             slug: 'Apple iPhone 14 Plus',
             category: 'Mobile',
@@ -92,7 +92,7 @@ const data = {
             description: "16.95 cm (6.7-inch) Super Retina XDR display Advanced camera system for better photos in any light Cinematic mode now in 4K Dolby Vision up to 30 fps Action mode for smooth, steady, handheld videos Vital safety technology — Crash Detection calls for help when you can’t"
         },
         {
-            _id: '8',
+            // _id: '8',
             name: 'Red Tape Men Shirt',
             slug: 'Red Tape Men Shirt',
             category: 'Shirt',
