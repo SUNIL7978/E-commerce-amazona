@@ -1,4 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import Axios from 'axios'
+import React, { useContext, useEffect, useReducer } from 'react'
+import { toast } from 'react-toastify'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
@@ -7,10 +9,27 @@ import CheckoutSteps from '../Components/CheckoutSteps';
 import { Store } from '../Store';
 import { Link, useNavigate } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { getError } from '../utils'
 import Button from 'react-bootstrap/Button';
 
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'CREATE_REQUEST':
+            return { ...state, loading: true }
+        case 'CREATE_SUCCESS':
+            return { ...state, loading: false }
+        case 'CREATE_FAIL':
+            return { ...state, loading: false }
+        default:
+            return state;
+    }
+}
 const PlaceOrderScreen = () => {
     const navigate = useNavigate()
+    const [{ loading }, dispatch] = useReducer(reducer, {
+        loading: false
+    })
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { cart, userInfo } = state
 
@@ -23,14 +42,41 @@ const PlaceOrderScreen = () => {
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
     const placeOrderHandler = async () => {
+        try {
+            dispatch({ type: 'CREATE_REQUEST' })
+            const { data } = await Axios.post(
+                '/api/orders',
+                {
+                    orderItems: cart.cartItems,
+                    shippingAddress: cart.shippingAddress,
+                    paymentMethod: cart.paymentMethod,
+                    itemsPrice: cart.itemsPrice,
+                    shippingPrice: cart.shippingPrice,
+                    taxPrice: cart.taxPrice,
+                    totalPrice: cart.totalPrice,
+                },
+                {
+                    headers: {
+                        authorization: `Bearer ${userInfo.token}`,
+                    },
+                }
+            );
 
+            ctxDispatch({ type: 'CART_CLEAR' })
+            dispatch({ type: 'CREATE_SUCCESS' })
+            localStorage.removeItem('cartItems')
+            navigate(`/order/${data.order._id}`);
+        } catch (err) {
+            dispatch({ type: 'CREATE_FAIL' })
+            toast.error(getError(err))
+        }
     }
 
     useEffect(() => {
         if (!cart.paymentMethod) {
-          navigate('/payment');
+            navigate('/payment');
         }
-      }, [cart, navigate]);
+    }, [cart, navigate]);
     return (
         <div>
             <CheckoutSteps step1 step2 step3 step4 />
@@ -44,11 +90,11 @@ const PlaceOrderScreen = () => {
                         <Card.Body>
                             <Card.Title>Shipping</Card.Title>
                             <Card.Text>
-                                <strong>Name : </strong> {cart.shippingAddress.fullname}<br />
+                                <strong>Name : </strong> {cart.shippingAddress.fullName}<br />
                                 <strong>Address : </strong> {cart.shippingAddress.address},
-                                {cart.shippingAddress.states}, {cart.shippingAddress.country} ,{cart.shippingAddress.landmark}<br />
-                                <strong>Pincode : </strong>{cart.shippingAddress.pincode}<br />
-                                <strong>MobileNumber : </strong>{cart.shippingAddress.mobilenumber}
+                                {cart.shippingAddress.State}, {cart.shippingAddress.country} ,{cart.shippingAddress.landMark}<br />
+                                <strong>Pincode : </strong>{cart.shippingAddress.pinCode}<br />
+                                <strong>MobileNumber : </strong>{cart.shippingAddress.mobileNumber}
                             </Card.Text>
                             <Link to='/shipping'>
                                 Edit
@@ -134,6 +180,7 @@ const PlaceOrderScreen = () => {
                                             Place Order
                                         </Button>
                                     </div>
+                                    {loading && <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>}
                                 </ListGroup.Item>
                             </ListGroup>
                         </Card.Body>

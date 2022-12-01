@@ -12,12 +12,12 @@ const ShippingAddressScreen = () => {
     const { userInfo, cart: { shippingAddress } } = state
 
     const [country, setCountry] = useState(shippingAddress.country || '')
-    const [fullname, setFullName] = useState(shippingAddress.fullname || '')
-    const [mobilenumber, setMobileNumber] = useState(shippingAddress.mobilenumber || '')
-    const [pincode, setPinCode] = useState(shippingAddress.pincode || '')
+    const [fullName, setFullName] = useState(shippingAddress.fullName || '')
+    const [mobileNumber, setMobileNumber] = useState(shippingAddress.mobileNumber || '')
+    const [pinCode, setPinCode] = useState(shippingAddress.pinCode || '')
     const [address, setAddress] = useState(shippingAddress.address || '')
-    const [states, setState] = useState(shippingAddress.states || '')
-    const [landmark, setLandmark] = useState(shippingAddress.landmark || '')
+    const [State, setState] = useState(shippingAddress.State || '')
+    const [landMark, setLandmark] = useState(shippingAddress.landMark || '')
 
     useEffect(() => {
         if (!userInfo) {
@@ -31,22 +31,22 @@ const ShippingAddressScreen = () => {
             type: 'SAVE_SHIPPING_ADDRESS',
             payload: {
                 country,
-                fullname,
-                mobilenumber,
-                pincode,
+                fullName,
+                mobileNumber,
+                pinCode,
                 address,
-                states,
-                landmark
+                State,
+                landMark
             }
         })
         localStorage.setItem('shippingAddress', JSON.stringify({
             country,
-            fullname,
-            mobilenumber,
-            pincode,
+            fullName,
+            mobileNumber,
+            pinCode,
             address,
-            states,
-            landmark
+            State,
+            landMark
         }))
         navigate('/payment');
     }
@@ -63,29 +63,29 @@ const ShippingAddressScreen = () => {
                         <Form.Label>Country/Region</Form.Label>
                         <Form.Control type="text" value={country} required onChange={(e) => setCountry(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className='mb-3' controlId='fullname'>
+                    <Form.Group className='mb-3' controlId='fullName'>
                         <Form.Label>Full name</Form.Label>
-                        <Form.Control type="text" value={fullname} required placeholder='Enter Full Name' onChange={(e) => setFullName(e.target.value)} />
+                        <Form.Control type="text" value={fullName} required placeholder='Enter Full Name' onChange={(e) => setFullName(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className='mb-3' controlId='mobilenumber'>
+                    <Form.Group className='mb-3' controlId='mobileNumber'>
                         <Form.Label>Mobile number</Form.Label>
-                        <Form.Control type="tel" value={mobilenumber} required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder='10 digit [0-9]{3}-[0-9]{3}-[0-9]{4} Mobile Number ' onChange={(e) => setMobileNumber(e.target.value)} />
+                        <Form.Control type="tel" value={mobileNumber} required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder='10 digit [0-9]{3}-[0-9]{3}-[0-9]{4} Mobile Number ' onChange={(e) => setMobileNumber(e.target.value)} />
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='pincode'>
                         <Form.Label>Pincode</Form.Label>
-                        <Form.Control type="text" value={pincode} required placeholder='6 digit [0-9]PIN code' onChange={(e) => setPinCode(e.target.value)} />
+                        <Form.Control type="text" value={pinCode} required placeholder='6 digit [0-9]PIN code' onChange={(e) => setPinCode(e.target.value)} />
                     </Form.Group>
                     <Form.Group className='mb-3' controlId='address'>
                         <Form.Label>Flat, House no., Building, Company, Apartment</Form.Label>
                         <Form.Control type="text" value={address} required onChange={(e) => setAddress(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className='mb-3' controlId='states'>
+                    <Form.Group className='mb-3' controlId='State'>
                         <Form.Label>State</Form.Label>
-                        <Form.Control type="text" value={states} required onChange={(e) => setState(e.target.value)} />
+                        <Form.Control type="text" value={State} required onChange={(e) => setState(e.target.value)} />
                     </Form.Group>
-                    <Form.Group className='mb-3' controlId='landmark'>
+                    <Form.Group className='mb-3' controlId='landMark'>
                         <Form.Label>Landmark</Form.Label>
-                        <Form.Control type="text" value={landmark} required placeholder='E.g.Near Apollo Hospital' onChange={(e) => setLandmark(e.target.value)} />
+                        <Form.Control type="text" value={landMark} required placeholder='E.g.Near Apollo Hospital' onChange={(e) => setLandmark(e.target.value)} />
                     </Form.Group>
                     <div className="mb-3">
                         <Button variant="primary" type='submit'>
