@@ -9,32 +9,41 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Store } from '../Store'
 import { getError } from '../utils';
 
-const SignInScreen = () => {
+const SignupScreen = () => {
     const navigate = useNavigate();
     const { search } = useLocation();
     const redirectInUrl = new URLSearchParams(search).get('redirect');
     const redirect = redirectInUrl ? redirectInUrl : '/';
 
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const { state, dispatch: ctxDispatch } = useContext(Store);
     const { userInfo } = state
 
     const submitHandler = async (e) => {
+
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+          }
         try {
-          const { data } = await Axios.post('/api/users/signin', {
-            email,
-            password,
-          });
-          ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-          localStorage.setItem('userInfo', JSON.stringify(data));
-          navigate(redirect || '/');
+            const { data } = await Axios.post('/api/users/signup', {
+                name,
+                email,
+                password,
+            });
+            ctxDispatch({ type: 'USER_SIGNIN', payload: data });
+            localStorage.setItem('userInfo', JSON.stringify(data));
+            navigate(redirect || '/');
         } catch (err) {
-          toast.error(getError(err));
+            toast.error(getError(err));
         }
-      };
+    };
 
     useEffect(() => {
         if (userInfo) {
@@ -42,41 +51,39 @@ const SignInScreen = () => {
         }
     }, [navigate, userInfo, redirect])
 
-    const showPassword = () =>{
-        let x = document.getElementById('password')
-        if(x.type === "password"){
-            x.type = 'text'
-        } else {
-            x.type = 'password'
-        }
-    }
-
     return (
         <Container className='small-container'>
             <Helmet>
-                <title>Sign In</title>
+                <title>Amazona New Account</title>
             </Helmet>
-            <h2 className='my-3'>Sign in</h2>
+            <h2 className='my-3'>Sign Up</h2>
             <Form onSubmit={submitHandler}>
+                <Form.Group className='mb-3' controlId='name'>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="text" required onChange={(e) => setName(e.target.value)} />
+                </Form.Group>
                 <Form.Group className='mb-3' controlId='email'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control type="email" required onChange={(e) => setEmail(e.target.value)} />
                 </Form.Group>
                 <Form.Group className='mb-3' controlId='password'>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" id='password' required onChange={(e) => setPassword(e.target.value)} />
+                    <Form.Control type="password" required onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
-                <input type='checkbox' onClick={showPassword} className="mb-3"/> Show Password
+                <Form.Group className='mb-3' controlId='confirmPassword'>
+                    <Form.Label>ConfirmPassword</Form.Label>
+                    <Form.Control type="password" required onChange={(e) => setConfirmPassword(e.target.value)} />
+                </Form.Group>
                 <div className='mb-3'>
-                    <Button type="submit">Sign in</Button>
+                    <Button type="submit">Sign up</Button>
                 </div>
                 <div className="mb-3">
-                    New customer?{' '}
-                    <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
+                    Already have an account?{' '}
+                    <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
                 </div>
             </Form>
         </Container>
     )
 }
 
-export default SignInScreen
+export default SignupScreen
