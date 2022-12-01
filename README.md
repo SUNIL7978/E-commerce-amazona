@@ -123,3 +123,8 @@
     1. handle submit action
     2. save token in store and local storage
     3. show user name in header
+
+20.Create Shipping Screen
+    1. create form inputs
+    2. handle save shipping address
+    3. add checkout wizard bar
