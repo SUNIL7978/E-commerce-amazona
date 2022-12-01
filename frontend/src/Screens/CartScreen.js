@@ -55,7 +55,7 @@ const CartScreen = () => {
                                 <ListGroup.Item key={item._id}>
                                     <Row className='align-items-center'>
                                         <Col md={5}>
-                                            <Link to={`/product/${item.slug}`}>
+                                            <Link to={`/product/${item.slug}`} style={{textDecoration:'none'}}>
                                                 <img src={item.image} alt={item.name} className="img-fluid rounded" style={{ height: "100px" }} />
                                                 <span className='cart_slug'>{item.name}</span></Link>
                                         </Col>
