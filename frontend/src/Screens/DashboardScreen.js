@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/esm/Col'
 import Card from 'react-bootstrap/Card'
 import { Chart } from "react-google-charts";
+import {Helmet} from 'react-helmet-async'
 
 const reducer = (state, action) => {
     switch (action.type) {
@@ -45,6 +46,9 @@ const DashboardScreen = () => {
     }, [userInfo])
     return (
         <div>
+            <Helmet>
+                <title>Admin DashBoard</title>
+            </Helmet>
             <h1 className='my-3'>DashBoard</h1>
             {loading ? (
                 <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>

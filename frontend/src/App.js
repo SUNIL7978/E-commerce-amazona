@@ -29,6 +29,7 @@ import SearchScreen from './Screens/SearchScreen';
 import ProtectedRoute from './Components/ProtectedRoute';
 import AdminRoute from './Components/AdminRoute';
 import DashboardScreen from './Screens/DashboardScreen';
+import ProductListScreen from './Screens/ProductListScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -113,13 +114,13 @@ function App() {
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/productlist">
+                      <LinkContainer to="/admin/products">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/orderlist">
+                      <LinkContainer to="/admin/orders">
                         <NavDropdown.Item>Orders</NavDropdown.Item>
                       </LinkContainer>
-                      <LinkContainer to="/admin/userlist">
+                      <LinkContainer to="/admin/users">
                         <NavDropdown.Item>Users</NavDropdown.Item>
                       </LinkContainer>
                     </NavDropdown>
@@ -168,7 +169,8 @@ function App() {
               <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute>} />
               <Route path='/profile' element={<ProtectedRoute><ProfileScreen /></ProtectedRoute>} />
               {/* Admin Routes Section */}
-              <Route path='/admin/dashboard' element={<AdminRoute> <DashboardScreen/></AdminRoute>}/>
+              <Route path='/admin/dashboard' element={<AdminRoute> <DashboardScreen /></AdminRoute>} />
+              <Route path='/admin/products' element={<AdminRoute> <ProductListScreen /></AdminRoute>} />
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
