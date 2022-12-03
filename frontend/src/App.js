@@ -23,8 +23,9 @@ import ProfileScreen from './Screens/ProfileScreen';
 import axios from 'axios';
 import { getError } from './utils';
 import Button from 'react-bootstrap/Button';
-import SearchBox from './Screens/SearchBox';
+import SearchBox from './Components/SearchBox';
 import { HiMenu } from 'react-icons/hi'
+import SearchScreen from './Screens/SearchScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -118,7 +119,7 @@ function App() {
         >
           <Nav className="flex-column text-white w-100 p-2 mt-3">
             <Nav.Item>
-                <h1><strong>Categories</strong></h1>
+              <h1><strong>Categories</strong></h1>
             </Nav.Item>
             {categories.map((category) => (
               <Nav.Item key={category}>
@@ -137,6 +138,7 @@ function App() {
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/search' element={<SearchScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/signin" element={<SignInScreen />} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />

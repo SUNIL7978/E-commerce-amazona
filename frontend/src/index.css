@@ -125,3 +125,19 @@ footer{
 .active-nav {
   left: 0;
 }
+
+.text-bold {
+  font-weight: bold;
+}
+
+.icon_circle{
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+}
+
+.department_category{
+  list-style: none;
+  color: #100901;
+}

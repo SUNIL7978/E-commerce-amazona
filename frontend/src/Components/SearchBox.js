@@ -14,6 +14,7 @@ export default function SearchBox() {
     navigate(query ? `/search/?query=${query}` : '/search');
   };
 
+
   return (
     <Form className="d-flex w-100 align-items-center justify-content-center" onSubmit={submitHandler}>
       <InputGroup>
