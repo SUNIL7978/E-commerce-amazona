@@ -26,6 +26,9 @@ import Button from 'react-bootstrap/Button';
 import SearchBox from './Components/SearchBox';
 import { HiMenu } from 'react-icons/hi'
 import SearchScreen from './Screens/SearchScreen';
+import ProtectedRoute from './Components/ProtectedRoute';
+import AdminRoute from './Components/AdminRoute';
+import DashboardScreen from './Screens/DashboardScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -105,6 +108,22 @@ function App() {
                       Sign in
                     </Link>
                   )}
+                  {userInfo && userInfo.isAdmin && (
+                    <NavDropdown title="Admin" id="admin-nav-dropdown">
+                      <LinkContainer to="/admin/dashboard">
+                        <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/productlist">
+                        <NavDropdown.Item>Products</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/orderlist">
+                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to="/admin/userlist">
+                        <NavDropdown.Item>Users</NavDropdown.Item>
+                      </LinkContainer>
+                    </NavDropdown>
+                  )}
                 </Nav>
               </Navbar.Collapse>
             </Container>
@@ -136,6 +155,7 @@ function App() {
         <main>
           <Container className='mt-3'>
             <Routes>
+              {/* User Routes Section */}
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/search' element={<SearchScreen />} />
@@ -144,9 +164,11 @@ function App() {
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />} />
-              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
+              <Route path='/order/:id' element={<ProtectedRoute><OrderScreen /></ProtectedRoute>} />
+              <Route path='/orderhistory' element={<ProtectedRoute><OrderHistoryScreen /></ProtectedRoute>} />
+              <Route path='/profile' element={<ProtectedRoute><ProfileScreen /></ProtectedRoute>} />
+              {/* Admin Routes Section */}
+              <Route path='/admin/dashboard' element={<AdminRoute> <DashboardScreen/></AdminRoute>}/>
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
