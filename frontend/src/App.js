@@ -63,7 +63,7 @@ function App() {
     <BrowserRouter>
       <div className={sidebarIsOpen ? 'd-flex flex-column site-container active-cont' : 'd-flex flex-column site-container'}>
         <ToastContainer position="bottom-center" limit={1} className="mb-3" />
-        <header>
+        <header style={{ position: 'sticky', top: '0px' , zIndex: '50' , }}>
           <Navbar bg="dark" variant="dark" expand='lg'>
             <Container>
               <Button

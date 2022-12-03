@@ -95,7 +95,7 @@ const DashboardScreen = () => {
                                 width="100%"
                                 height="400px"
                                 chartType="AreaChart"
-                                loader={<div>Loading Chart...</div>}
+                                loader={<div><img src='https://m.media-amazon.com/images/G/31/amazonui/loading/loading-1x._CB485947013_.gif' alt=''/></div>}
                                 data={[
                                     ['Date', 'Sales'],
                                     ...summary.dailyOrders.map((x) => [x._id, x.sales]),
@@ -112,7 +112,7 @@ const DashboardScreen = () => {
                                 width="100%"
                                 height="400px"
                                 chartType="PieChart"
-                                loader={<div>Loading Chart...</div>}
+                                loader={<div><img src='https://m.media-amazon.com/images/G/31/amazonui/loading/loading-1x._CB485947013_.gif' alt=''/></div>}
                                 data={[
                                     ['Category', 'Products'],
                                     ...summary.productCategories.map((x) => [x._id, x.count]),
