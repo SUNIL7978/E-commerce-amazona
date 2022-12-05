@@ -228,3 +228,10 @@
 
     1. create edit product backend api
     2. handle update click
+
+37.Upload Product Image
+
+    1. create cloudinary account
+    2. use the api key in env file
+    3. handle upload file
+    4. implement backend api to upload
