@@ -30,6 +30,14 @@ const reducer = (state, action) => {
             return { ...state, loadingCreate: false }
         case 'CREATE_FAIL':
             return { ...state, loadingCreate: false }
+        case 'DELETE_REQUEST':
+            return { ...state, loadingDelete: true, successDelete: false }
+        case 'DELETE_SUCCESS':
+            return { ...state, loadingDelete: false, successDelete: true }
+        case 'DELETE_FAIL':
+            return { ...state, loadingDelete: false, successDelete: false }
+        case 'DELETE_RESET':
+            return { ...state, loadingDelete: false, successDelete: false }
         default:
             return state;
     }
@@ -37,7 +45,7 @@ const reducer = (state, action) => {
 
 const ProductListScreen = () => {
 
-    const [{ loading, error, pages, products, loadingCreate }, dispatch] = useReducer(reducer, {
+    const [{ loading, error, pages, products, loadingCreate, loadingDelete, successDelete }, dispatch] = useReducer(reducer, {
         loading: true,
         error: ''
     })
@@ -60,8 +68,13 @@ const ProductListScreen = () => {
 
             }
         }
-        fetchData();
-    }, [page, userInfo])
+        if (successDelete) {
+            dispatch({ type: 'DELETE_RESET' })
+        } else {
+            fetchData();
+        }
+
+    }, [page, userInfo, successDelete])
 
     const createHandler = async () => {
         if (window.confirm('Are You Sure to create?')) {
@@ -86,6 +99,26 @@ const ProductListScreen = () => {
         }
     }
 
+
+
+    const deleteHandler = async (product) => {
+        if (window.confirm('Are You Sure to Delete?')) {
+            try {
+                dispatch({ type: 'DELETE_REQUEST' });
+                await axios.delete(`/api/products/${product._id}`, {
+                    headers: { Authorization: `Bearer ${userInfo.token}` },
+                });
+                toast.success('Product Deleted Successfully');
+                dispatch({ type: 'DELETE_SUCCESS' });
+            } catch (err) {
+                toast.error(getError(error));
+                dispatch({
+                    type: 'DELETE_FAIL',
+                });
+            }
+        }
+    }
+
     return (
         <div>
             <Helmet>
@@ -101,6 +134,9 @@ const ProductListScreen = () => {
             </Row>
             {
                 loadingCreate && <div><img src='https://m.media-amazon.com/images/G/31/amazonui/loading/loading-1x._CB485947013_.gif' alt='' /></div>
+            }
+            {
+                loadingDelete && <div><img src='https://m.media-amazon.com/images/G/31/amazonui/loading/loading-1x._CB485947013_.gif' alt='' /></div>
             }
 
             {loading ? (
@@ -135,8 +171,16 @@ const ProductListScreen = () => {
                                             onClick={() => navigate(`/admin/product/${product._id}`)}
                                         >
                                             Edit
+                                        </Button> &nbsp;
+                                        <Button
+                                            type="button"
+                                            variant="light"
+                                            onClick={() => deleteHandler(product)}
+                                        >
+                                            Delete
                                         </Button>
                                     </td>
+
                                 </tr>
                             ))}
                         </tbody>

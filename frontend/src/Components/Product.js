@@ -26,7 +26,7 @@ const Product = ({ product }) => {
         });
     };
     return (
-        <Card className='mt-3'>
+        <Card style={{padding: '1rem'}}>
             <Link to={`/product/${product.slug}`}>
                 <img src={product.image} className="card-img-top" alt={product.name} style={{ width: "100%", height: "30vh" }} />
             </Link>
