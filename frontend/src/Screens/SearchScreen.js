@@ -207,6 +207,7 @@ export default function SearchScreen() {
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'text-bold' : ''}
+                    style={{ backgroundColor:'yellow'}}
                   >
                     <Rating caption={' & up'} rating={r.rating}></Rating>
                   </Link>

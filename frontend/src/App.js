@@ -30,6 +30,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import AdminRoute from './Components/AdminRoute';
 import DashboardScreen from './Screens/DashboardScreen';
 import ProductListScreen from './Screens/ProductListScreen';
+import ProductEditScreen from './Screens/ProductEditScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -63,7 +64,7 @@ function App() {
     <BrowserRouter>
       <div className={sidebarIsOpen ? 'd-flex flex-column site-container active-cont' : 'd-flex flex-column site-container'}>
         <ToastContainer position="bottom-center" limit={1} className="mb-3" />
-        <header style={{ position: 'sticky', top: '0px' , zIndex: '50' , }}>
+        <header style={{ position: 'sticky', top: '0px', zIndex: '50', }}>
           <Navbar bg="dark" variant="dark" expand='lg'>
             <Container>
               <Button
@@ -171,6 +172,14 @@ function App() {
               {/* Admin Routes Section */}
               <Route path='/admin/dashboard' element={<AdminRoute> <DashboardScreen /></AdminRoute>} />
               <Route path='/admin/products' element={<AdminRoute> <ProductListScreen /></AdminRoute>} />
+              <Route
+                path="/admin/product/:id"
+                element={
+                  <AdminRoute>
+                    <ProductEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
               <Route path='/' element={<HomeScreen />} />
             </Routes>
           </Container>
