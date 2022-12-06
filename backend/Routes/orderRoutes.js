@@ -30,8 +30,8 @@ orderRouter.get(
   '/',
   isAuth,
   isAdmin,
-  expressAsyncHandler(async (req,res) =>{
-    const orders = await Order.find().populate( 'user' , 'name');
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find().populate('user', 'name');
     res.send(orders);
   })
 )
@@ -76,7 +76,7 @@ orderRouter.get(
         }
       }
     ])
-    res.send({ users, orders, dailyOrders ,productCategories});
+    res.send({ users, orders, dailyOrders, productCategories });
   })
 );
 
@@ -109,13 +109,13 @@ orderRouter.put(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id)
-    if(order){
+    if (order) {
       order.isDelivered = true;
       order.deliveredAt = Date.now()
       await order.save()
-      res.send({message:'Order Delivered'})
+      res.send({ message: 'Order Delivered' })
     } else {
-      res.status(404).send({message: 'Order Not delivered'})
+      res.status(404).send({ message: 'Order Not delivered' })
     }
   })
 )
@@ -142,5 +142,20 @@ orderRouter.put(
     }
   })
 );
+
+orderRouter.delete(
+  '/:id',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id)
+    if (order) {
+      await order.remove()
+      res.send({ message: 'Order Deleted' })
+    } else {
+      res.status(404).send({ message: 'Order Not Found' })
+    }
+  })
+)
 
 export default orderRouter;
