@@ -69,33 +69,32 @@ const OrderListScreen = () => {
                         </tr>
                     </thead>
                     <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>{order.totalPrice.toFixed(2)}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
-                <td>
-                  {order.isDelivered
-                    ? order.deliveredAt.substring(0, 10)
-                    : 'No'}
-                </td>
-                <td>
-                  <Button
-                    type="button"
-                    variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
-                    }}
-                  >
-                    Details
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+                        {orders.map((order) => (
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.user ? order.user.name : 'DELETED USER'}</td>
+                                <td>{order.createdAt.substring(0, 10)}</td>
+                                <td>{order.totalPrice.toFixed(2)}</td>
+                                <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
+                                <td>
+                                    {order.isDelivered
+                                        ? order.deliveredAt.substring(0, 10)
+                                        : 'No'}
+                                </td>
+                                <td>
+                                    <Button
+                                        type="button"
+                                        variant="light"
+                                        onClick={() => {
+                                            navigate(`/order/${order._id}`);
+                                        }}
+                                    >
+                                        Details
+                                    </Button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             )}
         </div>
