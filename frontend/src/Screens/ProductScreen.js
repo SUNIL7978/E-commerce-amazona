@@ -42,6 +42,7 @@ const ProductScreen = () => {
 
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
+    const [selectedImage, setSelectedImage] = useState('');
 
     const navigate = useNavigate();
     const [{ loading, error, product, loadingCreateReview }, dispatch] = useReducer(reducer, {
@@ -124,8 +125,27 @@ const ProductScreen = () => {
             <div>
                 <Row>
                     <Col md={6}>
-                        <img src={product.image} alt={product.name} style={{ width: "100%" }} />
+                        <img src={selectedImage || product.image} alt={product.name} style={{ width: "100%" }} className='product_image' />
+                        <ListGroup.Item>
+                            <div xs={1} md={2} className="row_Images">
+                                {[product.image, ...product.images].map((x) => (
+                                    <Col key={x}>
+                                        <div style={{ padding: '10px' }}>
+                                            <div
+                                                className="thumbnail"
+                                                type="button"
+                                                variant="light"
+                                                onClick={() => setSelectedImage(x)}
+                                            >
+                                                <Card.Img variant='top' src={x} alt="product" style={{ width: '100%', height: '30%' }} className='product_image_card' />
+                                            </div>
+                                        </div>
+                                    </Col>
+                                ))}
+                            </div>
+                        </ListGroup.Item>
                     </Col>
+
                     <Col md={3}>
                         <ListGroup variant="flush">
                             <Helmet>
@@ -181,12 +201,6 @@ const ProductScreen = () => {
                     </Col>
                 </Row>
                 <div className="my-3">
-                    <h2 ref={reviewsRef}>Reviews</h2>
-                    <div className="mb-3">
-                        {product.reviews.length === 0 && (
-                            <MessageBox>There is no review</MessageBox>
-                        )}
-                    </div>
                     <div className="my-3">
                         {userInfo ? (
                             <form onSubmit={submitHandler}>
@@ -237,6 +251,12 @@ const ProductScreen = () => {
                                 </Link>{' '}
                                 to write a review
                             </MessageBox>
+                        )}
+                    </div>
+                    <h2 ref={reviewsRef}>Reviews</h2>
+                    <div className="mb-3">
+                        {product.reviews.length === 0 && (
+                            <MessageBox>There is no review</MessageBox>
                         )}
                     </div>
                     <ListGroup>

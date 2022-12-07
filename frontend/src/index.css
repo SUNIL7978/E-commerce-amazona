@@ -145,3 +145,16 @@ footer{
 .Star_Rating{
   background-color: #FDCC0D;
 }
+
+.product_image{
+  border: 1px solid gray;
+}
+
+.product_image_card{
+  border: 1px solid gray;
+}
+
+.row_Images{
+  display: flex;
+  
+}
