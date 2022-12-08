@@ -34,6 +34,7 @@ import ProductEditScreen from './Screens/ProductEditScreen';
 import OrderListScreen from './Screens/OrderListScreen';
 import UserListScreen from './Screens/UserListScreen';
 import UseEditScreen from './Screens/UseEditScreen';
+import {MdOutlineShoppingCart} from 'react-icons/md'
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -84,6 +85,7 @@ function App() {
                 <SearchBox />
                 <Nav className="me-auto w-100 justify-content-end">
                   <Link to="/cart" className="nav-link">
+                  <span className='cart_Icon'><MdOutlineShoppingCart/></span>
                     Cart
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">

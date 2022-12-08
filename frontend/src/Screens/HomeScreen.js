@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import {Helmet} from 'react-helmet-async'
+import { Helmet } from 'react-helmet-async'
 import axios from 'axios'
 import logger from 'use-reducer-logger';
 import Product from '../Components/Product';
@@ -48,7 +48,7 @@ const HomeScreen = () => {
             <Helmet>
                 <title>Amazona</title>
             </Helmet>
-            <h1>Featured Product</h1>
+           <h2>Fetured Product</h2>
             <div className="products">
                 {loading ? (
                     <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>
@@ -58,7 +58,7 @@ const HomeScreen = () => {
                     <Row>
                         {products.map((product) => (
                             <Col key={product.slug} sm={6} md={4} lg={3} className="mb-3">
-                               <Product product={product}/>
+                                <Product product={product} />
                             </Col>
                         ))}
                     </Row>

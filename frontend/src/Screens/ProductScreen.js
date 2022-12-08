@@ -117,6 +117,7 @@ const ProductScreen = () => {
         }
     };
     return (
+
         loading ? (
             <div><img src="https://m.media-amazon.com/images/G/31/amazonui/loading/loading-4x._CB485930736_.gif" alt="" /></div>
         ) : error ? (
